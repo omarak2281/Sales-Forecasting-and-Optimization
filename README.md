@@ -82,7 +82,23 @@ Contributions and suggestions are welcome! Please open an issue or pull request.
 
 The web interface allows users to input features and receive sales predictions. Below is a screenshot of the UI:
 
-![UI Screenshot](images/ui_screenshot.jpeg)
+![Dashboard Page](images/dashboard%20page.jpg)
+*Dashboard overview with KPIs and visualizations.*
+
+![Prediction Page](images/predict%20page.jpg)
+*Prediction form where users input features to get sales forecasts.*
+
+![Complete Predict Page](images/complate%20predict%20page.jpg)
+*Full prediction results display.*
+
+![MLOps Page](images/mlops%20page.jpg)
+*MLOps dashboard for experiment tracking and retraining.*
+
+![Complete MLOps Page](images/complate%20mlops%20page.jpg)
+*Comprehensive MLOps and model management interface.*
+
+![About Page](images/about%20page.jpg)
+*About page with project and team information.*
 
 ## Prediction Example
 
@@ -102,7 +118,8 @@ A sample prediction using the following inputs:
 
 Below is a screenshot of the prediction output:
 
-![Prediction Screenshot](images/prediction_screenshot.png)
+![Prediction Screenshot](images/complate%20predict%20page.jpg)
+*Example of the prediction output interface.*
 
 ## Installation
 

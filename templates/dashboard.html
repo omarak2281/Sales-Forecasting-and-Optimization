@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecommerce Sales Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(120deg, #3a0ca3 0%, #7209b7 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .dashboard-header {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+        .segment-btn {
+            border-radius: 8px;
+            font-weight: 600;
+            margin-right: 10px;
+            background: #f6e05e;
+            color: #222;
+            border: none;
+        }
+        .segment-btn.active {
+            background: #ffb703;
+        }
+        .kpi-card {
+            background: #432371;
+            border-radius: 14px;
+            box-shadow: 0 6px 24px rgba(50,50,93,0.12), 0 1.5px 6px rgba(0,0,0,0.06);
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .kpi-value { font-size: 1.7rem; font-weight: 700; }
+        .kpi-label { font-size: 1rem; color: #f6e05e; font-weight: 600; }
+        .kpi-trend-up { color: #43ea7f; font-weight: 600; }
+        .kpi-trend-down { color: #ff3b3f; font-weight: 600; }
+        .card-section {
+            background: #3a0ca3;
+            border-radius: 14px;
+            padding: 1rem 1.2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 18px rgba(50,50,93,0.12), 0 1.5px 6px rgba(0,0,0,0.06);
+        }
+        .table th, .table td { color: #fff; border: none; }
+        .table th { background: #432371; }
+        .table-striped tbody tr:nth-of-type(odd) { background: #4c2885; }
+        .table-striped tbody tr:nth-of-type(even) { background: #3a0ca3; }
+        .chart-container { height: 220px; }
+        .donut-container { height: 180px; }
+        .map-placeholder {
+            width: 100%;
+            height: 220px;
+            background: url('https://i.ibb.co/6nGk8w7/usa-map-dark.png') center/cover no-repeat;
+            border-radius: 12px;
+            position: relative;
+        }
+        .section-title { color: #f6e05e; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.7rem; }
+    </style>
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="dashboard-header">ECOMMERCE SALES DASHBOARD</span>
+            <div>
+                <button class="segment-btn active" data-segment="Consumer">Consumer</button>
+                <button class="segment-btn" data-segment="Corporate">Corporate</button>
+                <button class="segment-btn" data-segment="Home Office">Home Office</button>
+            </div>
+        </div>
+        <div id="dashboard-content">
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <div class="kpi-card">
+                        <div class="kpi-label">YTD Sales</div>
+                        <div class="kpi-value" id="kpi-sales"></div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="kpi-card">
+                        <div class="kpi-label">YTD Profit</div>
+                        <div class="kpi-value" id="kpi-profit"></div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="kpi-card">
+                        <div class="kpi-label">YTD Quantity</div>
+                        <div class="kpi-value" id="kpi-quantity"></div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="kpi-card">
+                        <div class="kpi-label">YTD Profit Margin</div>
+                        <div class="kpi-value" id="kpi-profit-margin"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card-section mb-3">
+                        <div class="section-title">Sales by Category</div>
+                        <table class="table table-striped table-sm mb-0">
+                            <thead><tr><th>Category</th><th>YTD Sales</th><th>PYTD Sales</th><th>YOY Sales</th><th>Trend</th></tr></thead>
+                            <tbody id="category-table-body"></tbody>
+                        </table>
+                    </div>
+                    <div class="card-section">
+                        <div class="section-title">Sales by States</div>
+                        <div class="map-placeholder"></div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card-section mb-3">
+                        <div class="section-title">Top 5 Products by YTD Sales</div>
+                        <div class="chart-container">
+                            <canvas id="topProductsChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card-section">
+                        <div class="section-title">Bottom 5 Products by YTD Sales</div>
+                        <div class="chart-container">
+                            <canvas id="bottomProductsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card-section mb-3">
+                        <div class="section-title">YTD Sales by Region</div>
+                        <div class="donut-container">
+                            <canvas id="regionDonut"></canvas>
+                        </div>
+                    </div>
+                    <div class="card-section">
+                        <div class="section-title">YTD Sales by Shipping Type</div>
+                        <div class="donut-container">
+                            <canvas id="shippingDonut"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="dashboard-loading" style="display:none;text-align:center;font-size:1.2rem;color:#f6e05e;">Loading...</div>
+    </div>
+    <script>
+    let topProductsChart, bottomProductsChart, regionDonut, shippingDonut;
+    const kpiTrendIcon = (trend) => trend >= 0 ? `<span class="kpi-trend-up">▲ ${trend > 0 ? '+' : ''}${trend.toFixed(2)}%</span>` : `<span class="kpi-trend-down">▼ ${trend.toFixed(2)}%</span>`;
+    function setLoading(loading) {
+        document.getElementById('dashboard-content').style.display = loading ? 'none' : '';
+        document.getElementById('dashboard-loading').style.display = loading ? '' : 'none';
+    }
+    async function loadDashboard(segment) {
+        setLoading(true);
+        try {
+            const res = await fetch(`/api/dashboard_data?segment=${encodeURIComponent(segment)}`);
+            const data = await res.json();
+            // KPIs
+            document.getElementById('kpi-sales').innerHTML = `$${data.kpis.sales.value}${data.kpis.sales.unit} ${kpiTrendIcon(data.kpis.sales.trend)}`;
+            document.getElementById('kpi-profit').innerHTML = `$${data.kpis.profit.value}${data.kpis.profit.unit} ${kpiTrendIcon(data.kpis.profit.trend)}`;
+            document.getElementById('kpi-quantity').innerHTML = `${data.kpis.quantity.value}${data.kpis.quantity.unit} ${kpiTrendIcon(data.kpis.quantity.trend)}`;
+            document.getElementById('kpi-profit-margin').innerHTML = `${data.kpis.profit_margin.value}${data.kpis.profit_margin.unit} ${kpiTrendIcon(data.kpis.profit_margin.trend)}`;
+            // Category Table
+            const catBody = document.getElementById('category-table-body');
+            catBody.innerHTML = '';
+            data.category_table.forEach(row => {
+                catBody.innerHTML += `<tr>
+                    <td>${row.category}</td>
+                    <td>$${row.ytd.toFixed(2)}M</td>
+                    <td>$${row.pytd.toFixed(2)}M</td>
+                    <td>${row.yoy.toFixed(2)}%</td>
+                    <td>${row.trend === 'up' ? '<span class="kpi-trend-up">▲</span>' : '<span class="kpi-trend-down">▼</span>'}</td>
+                </tr>`;
+            });
+            // Top Products Chart
+            const topLabels = data.top_products.map(p => p.name);
+            const topData = data.top_products.map(p => p.sales);
+            if (topProductsChart) topProductsChart.destroy();
+            topProductsChart = new Chart(document.getElementById('topProductsChart'), {
+                type: 'bar',
+                data: {
+                    labels: topLabels,
+                    datasets: [{ label: 'YTD Sales', data: topData, backgroundColor: '#43ea7f' }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { color: '#432371' }, ticks: { color: '#fff' } },
+                        y: { grid: { color: '#432371' }, ticks: { color: '#fff' } }
+                    }
+                }
+            });
+            // Bottom Products Chart
+            const bottomLabels = data.bottom_products.map(p => p.name);
+            const bottomData = data.bottom_products.map(p => p.sales);
+            if (bottomProductsChart) bottomProductsChart.destroy();
+            bottomProductsChart = new Chart(document.getElementById('bottomProductsChart'), {
+                type: 'bar',
+                data: {
+                    labels: bottomLabels,
+                    datasets: [{ label: 'YTD Sales', data: bottomData, backgroundColor: '#ffb703' }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { color: '#432371' }, ticks: { color: '#fff' } },
+                        y: { grid: { color: '#432371' }, ticks: { color: '#fff' } }
+                    }
+                }
+            });
+            // Region Donut
+            const regionLabels = data.region.map(r => r.name);
+            const regionData = data.region.map(r => r.sales);
+            if (regionDonut) regionDonut.destroy();
+            regionDonut = new Chart(document.getElementById('regionDonut'), {
+                type: 'doughnut',
+                data: {
+                    labels: regionLabels,
+                    datasets: [{ data: regionData, backgroundColor: ['#43ea7f', '#f6e05e', '#ffb703', '#ff3b3f'] }]
+                },
+                options: { plugins: { legend: { labels: { color: '#fff' } } }, cutout: '70%' }
+            });
+            // Shipping Donut
+            const shippingLabels = data.shipping.map(s => s.name);
+            const shippingData = data.shipping.map(s => s.sales);
+            if (shippingDonut) shippingDonut.destroy();
+            shippingDonut = new Chart(document.getElementById('shippingDonut'), {
+                type: 'doughnut',
+                data: {
+                    labels: shippingLabels,
+                    datasets: [{ data: shippingData, backgroundColor: ['#43ea7f', '#f6e05e', '#ffb703', '#ff3b3f'] }]
+                },
+                options: { plugins: { legend: { labels: { color: '#fff' } } }, cutout: '70%' }
+            });
+        } catch (err) {
+            alert('Failed to load dashboard data!');
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    }
+    // Segment button interactivity
+    document.querySelectorAll('.segment-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.segment-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            loadDashboard(this.getAttribute('data-segment'));
+        });
+    });
+    // Initial load
+    loadDashboard('Consumer');
+    </script>
+</body>
+</html>

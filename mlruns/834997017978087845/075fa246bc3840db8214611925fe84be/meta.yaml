@@ -1,0 +1,15 @@
+artifact_uri: file:///F:\Superstore-Sales-Prediction2\Superstore-Sales-Prediction\mlruns/834997017978087845/075fa246bc3840db8214611925fe84be/artifacts
+end_time: 1746814914747
+entry_point_name: ''
+experiment_id: '834997017978087845'
+lifecycle_stage: active
+run_id: 075fa246bc3840db8214611925fe84be
+run_name: prediction
+run_uuid: 075fa246bc3840db8214611925fe84be
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1746814914538
+status: 3
+tags: []
+user_id: Omar

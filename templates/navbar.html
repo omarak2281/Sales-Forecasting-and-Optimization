@@ -1,0 +1,74 @@
+<nav class="navbar navbar-expand-lg navbar-dark appbar-glass shadow-lg">
+  <a class="navbar-brand font-weight-bold d-flex align-items-center" href="/" style="font-size:2rem; color:#f6e05e;">
+    <span class="mr-2">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="18" cy="18" r="18" fill="#6C2BD7"/>
+        <path d="M10 24L18 12L26 24" stroke="#F6E05E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+    Superstore Sales
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item {% if request.path == '/' %}active{% endif %}">
+        <a class="nav-link" href="/" style="color:#f6e05e;">Prediction</a>
+      </li>
+      <li class="nav-item {% if request.path == '/dashboard' %}active{% endif %}">
+        <a class="nav-link" href="/dashboard">Dashboard</a>
+      </li>
+      <li class="nav-item {% if request.path == '/mlops' %}active{% endif %}">
+        <a class="nav-link" href="/mlops">MLOps</a>
+      </li>
+      <li class="nav-item {% if request.path == '/about' %}active{% endif %}">
+        <a class="nav-link" href="/about">About</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<style>
+.appbar-glass {
+  background: rgba(44, 22, 89, 0.92);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 32px rgba(44,22,89,0.13), 0 1.5px 6px rgba(0,0,0,0.10);
+  border-bottom: 2.5px solid #f6e05e;
+  min-height: 70px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.18rem;
+  letter-spacing: 0.02em;
+}
+.navbar-brand {
+  font-size: 2.1rem !important;
+  font-weight: 700;
+  color: #f6e05e !important;
+  letter-spacing: 0.01em;
+}
+.navbar-nav .nav-link {
+  color: #fff !important;
+  margin-right: 1.2rem;
+  font-weight: 600;
+  font-size: 1.09rem;
+  position: relative;
+  transition: color 0.2s, background 0.2s;
+  border-radius: 8px;
+  padding: 0.6rem 1.1rem;
+}
+.navbar-nav .nav-link:hover, .navbar-nav .active .nav-link {
+  color: #6C2BD7 !important;
+  background: linear-gradient(90deg, #f6e05e 0%, #fbbf24 100%);
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+@media (max-width: 767px) {
+  .navbar-brand { font-size: 1.2rem !important; }
+  .navbar-nav .nav-link { font-size: 1rem; padding: 0.5rem 0.8rem; margin-right: 0.4rem; }
+  .appbar-glass { min-height: 54px; }
+}
+</style>

@@ -1,0 +1,16 @@
+artifact_uri: file:///F:/Superstore-Sales-Prediction2/Superstore-Sales-Prediction/mlruns/986226561218885074/376f4a54f77e4410b62f7ab4def7fa3e/artifacts
+deleted_time: 1746809625615
+end_time: 1746806857533
+entry_point_name: ''
+experiment_id: '986226561218885074'
+lifecycle_stage: deleted
+run_id: 376f4a54f77e4410b62f7ab4def7fa3e
+run_name: amusing-hare-1
+run_uuid: 376f4a54f77e4410b62f7ab4def7fa3e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1746806810858
+status: 3
+tags: []
+user_id: Omar

@@ -1,0 +1,12 @@
+[build]
+  publish = "templates"
+  command = "echo 'No build step required'"
+
+[dev]
+  framework = "flask"
+  port = 8000
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200

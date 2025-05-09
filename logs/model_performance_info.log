@@ -1,0 +1,4 @@
+[2025-05-09T19:29:11.238108] Prediction: 365.35, Input: {'Profit': 100.0, 'Postal Code': 10000.0, 'Discount': 0.0, 'Order Day': 1, 'Order Month': 1, 'Quantity': 1.0, 'Ship Day': 2, 'Order Weekday': 6}
+[2025-05-09T19:29:11.239109] Prediction: 365.35, Input: {'Profit': 100.0, 'Postal Code': 10000.0, 'Discount': 0.0, 'Order Day': 1, 'Order Month': 1, 'Quantity': 1.0, 'Ship Day': 2, 'Order Weekday': 6}
+[2025-05-09T19:29:11.243105] Prediction: 365.35, Input: {'Profit': 100.0, 'Postal Code': 10000.0, 'Discount': 0.0, 'Order Day': 1, 'Order Month': 1, 'Quantity': 1.0, 'Ship Day': 2, 'Order Weekday': 6}
+[2025-05-09T19:37:02.850511] Prediction: 365.35, Input: {'Profit': 100.0, 'Postal Code': 10000.0, 'Discount': 0.0, 'Order Day': 1, 'Order Month': 1, 'Quantity': 1.0, 'Ship Day': 2, 'Order Weekday': 6}

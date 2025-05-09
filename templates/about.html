@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Superstore Sales Prediction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Poppins', sans-serif; }</style>
+</head>
+<body style="background: linear-gradient(120deg, #f6f8fa 0%, #e3e8ee 100%); min-height:100vh;">
+    {% include 'navbar.html' %}
+    <div class="container mt-5">
+        <div class="card shadow-lg p-4" style="border-radius: 18px; background: #fff;">
+            <h2 style="color:#f6e05e; font-weight:700;">About This Project</h2>
+            <p class="mt-3" style="font-size:1.15rem; color:#333;">
+                <b>Superstore Sales Prediction</b> is a modern web application that showcases a complete machine learning workflow for retail sales forecasting. The project integrates data science best practices, robust MLOps, and an intuitive dashboard to deliver actionable business insights.
+            </p>
+            <ul style="font-size:1.1rem;">
+                <li><b>Real-time Prediction:</b> Instantly forecast sales using a trained machine learning model built on real Superstore data.</li>
+                <li><b>Interactive Dashboard:</b> Explore sales, profit, and trends by segment, category, region, and more, with dynamic visualizations and KPIs.</li>
+                <li><b>MLOps & Monitoring:</b> Automated retraining, MLflow experiment tracking, and logging for continuous improvement and transparency.</li>
+                <li><b>Technical Stack:</b> Python, Flask, scikit-learn, pandas, MLflow, Bootstrap, and modern data visualization libraries.</li>
+            </ul>
+            <hr>
+            <p style="font-size:1.05rem; color:#666;">
+                <b>Business Value:</b> This solution empowers retail teams to make data-driven decisions for inventory, pricing, and strategy by providing accurate forecasts and clear, actionable analytics.<br>
+                <b>Future Work:</b> Planned enhancements include cloud deployment, advanced analytics (e.g., anomaly detection), and more customizable reporting.
+            </p>
+            <p class="mb-0" style="color:#888;">Created for the AI & Data Science Track – Round 2. &copy; 2025</p>
+        </div>
+    </div>
+</body>
+<style>
+.card.shadow-lg {
+    box-shadow: 0 6px 24px rgba(50,50,93,0.12), 0 1.5px 6px rgba(0,0,0,0.06);
+}
+</style>
+</html>
